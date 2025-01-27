@@ -8,7 +8,7 @@ Authors@R: c(person(given="Frederic", family="Commo", role=c("aut", "cre"), emai
 Maintainer: Frederic Commo <fredcommo@gmail.com>
 Depends: methods
 Imports: stats,graphics,utils
-Suggests: RUnit,knitr
+Suggests: RUnit,knitr, rmarkdown
 VignetteBuilder: knitr
 Description: Performing drug response analyses and IC50 estimations using n-Parameter logistic regression. Can also be applied to proliferation analyses.
 License: GPL
