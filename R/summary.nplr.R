@@ -1,8 +1,28 @@
+#' Summarizing \code{nplr} Objects
+#'
+#' A S3 method to visualize a model summary as a table.
+#'
+#' @param object An object of class \code{\link{nplr}}.
+#' @param ... Other optional parameters (not used).
+#'
+#' @details None
+#'
+#' @examples
+#' # Using the PC-3 data
+#' require(nplr)
+#' path <- system.file("extdata", "pc3.txt", package = "nplr")
+#' pc3 <- read.delim(path)
+#' model <- nplr(x = pc3$CONC, y = pc3$GIPROP)
+#' summary(model)
+#'
+#' @seealso \code{\link{plot.nplr}}
+#' @name summary.nplr
+#' @export
 summary.nplr <- function(object, ...){
-    
+
     pars <- unlist(getPar(object))
     pars[-1] <- format(pars[-1], digits = 6, scientific = TRUE)
-    
+
     goodness <- getGoodness(object)
     gof <- format(goodness$gof, digits = 6, scientific = TRUE)
     wgof <- format(goodness$wgof, digits = 6, scientific = TRUE)
@@ -23,7 +43,7 @@ summary.nplr <- function(object, ...){
     nplrVersion <- as.character(packageVersion("nplr"))
     nplrDate <- as.character(packageDescription("nplr")["Date"])
     Rversion <- as.character(version["version.string"])
-    
+
     out <- cbind.data.frame(t(pars),
                             GOF = gof,
                             weightedGOF = wgof,
@@ -36,7 +56,7 @@ summary.nplr <- function(object, ...){
                             "nplr version" = sprintf("%s (%s)",nplrVersion, nplrDate),
                             "R version" = gsub("R version ", "", Rversion)
     )
-    
+
     out <- data.frame(summary = t(out))
     colnames(out) <- 'value'
     print(out)
